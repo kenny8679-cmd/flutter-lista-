@@ -1,0 +1,45 @@
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+
+class HomePageTemp extends StatelessWidget {
+  final opciones = [
+    'opcion1',
+    'opcion2',
+    'opcion3',
+    'opcion4',
+    'opcion5',
+    'opcion6'
+  ];
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Componente Temporal'),
+      ),
+      body: ListView(children: _crearWidgets(context)),
+    );
+  }
+
+  List<Widget> _crearWidgets(BuildContext context) {
+    List<Widget> lista = new List<Widget>();
+
+    for (String opt in opciones) {
+      final tempWidget = ListTile(
+        title: Text(opt),
+        onTap: () {
+          mensaje(opt, context);
+        },
+      );
+      lista.add(tempWidget);
+      lista.add(Divider());
+    }
+
+    return lista;
+  }
+
+  void mensaje(String opcion, BuildContext context) {
+    final snackBar = SnackBar(content: Text(opcion));
+    ScaffoldMessenger.of(context).showSnackBar(snackBar);
+  }
+}
